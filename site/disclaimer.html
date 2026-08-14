@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Disclaimer — Train Collection Catalog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="site-gate">
+  <form class="gate-box" id="site-gate-form" autocomplete="off">
+    <h2>This catalog is private</h2>
+    <input type="password" id="site-gate-input" placeholder="Password" autofocus>
+    <button type="submit">Enter</button>
+    <p class="gate-error" id="site-gate-error"></p>
+  </form>
+</div>
+
+<script>
+(function () {
+  var HASH = "9cc282e579be8aa7c93e16715d762a2b851509e7720bbadce6bebd77d154cb82";
+  var STORE_KEY = "trainCatalogAuthed";
+  var storage = null;
+  try { storage = window.sessionStorage; } catch (e) { storage = null; }
+
+  var already = false;
+  try { already = !!storage && storage.getItem(STORE_KEY) === '1'; } catch (e) {}
+
+  function unlock() {
+    document.body.classList.remove('gate-locked');
+    var gate = document.getElementById('site-gate');
+    if (gate) gate.classList.add('hidden');
+    document.dispatchEvent(new Event('site-authed'));
+  }
+
+  if (already) {
+    unlock();
+  } else {
+    document.body.classList.add('gate-locked');
+  }
+
+  function sha256Hex(text) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+        return ('0' + b.toString(16)).slice(-2);
+      }).join('');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (already) return;
+    var form = document.getElementById('site-gate-form');
+    var input = document.getElementById('site-gate-input');
+    var error = document.getElementById('site-gate-error');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!window.crypto || !window.crypto.subtle) {
+        error.textContent = "This browser can't check the password here (needs https or localhost).";
+        return;
+      }
+      sha256Hex(input.value).then(function (hex) {
+        if (hex === HASH) {
+          try { storage && storage.setItem(STORE_KEY, '1'); } catch (e) {}
+          unlock();
+        } else {
+          error.textContent = 'Wrong password.';
+          input.value = '';
+          input.focus();
+        }
+      });
+    });
+  });
+})();
+</script>
+<a class="back" href="index.html">&larr; back to catalog</a>
+<h1>About This Catalog</h1>
+<div class="disclaimer">
+<p>This website shows model trains from a private collection. The owner wants to sell these trains.</p>
+<p>All photos on this website are original and have not been retouched or edited in any way. What you see in each photo is exactly what the train looks like.</p>
+<p>We used a computer program to help us identify the model, manufacturer and other details. This program is called AI, short for artificial intelligence. It looked at photos of each train and made a guess about it.</p>
+<p>The AI guessed things like the maker, the size, and the age of each train. Each guess has a percent number next to it, like 90%. A higher number means the AI is more sure. A lower number means the AI is less sure.</p>
+<p>AI guesses can be wrong. Please do not treat every guess as fact. Look closely at the photos. If you know trains well, check the details yourself.</p>
+<p>Some pages also have notes about value or price. These notes are casual guesses, not real facts. If the value matters to you, ask a trained expert to look at the train in person.</p>
+<p>Before you buy anything, please ask questions. Look at all the photos closely.</p>
+<p>Thank you for visiting this collection.</p>
+</div>
+</body>
+</html>

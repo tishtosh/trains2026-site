@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Item — Train Collection Catalog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="site-gate">
+  <form class="gate-box" id="site-gate-form" autocomplete="off">
+    <h2>This catalog is private</h2>
+    <input type="password" id="site-gate-input" placeholder="Password" autofocus>
+    <button type="submit">Enter</button>
+    <p class="gate-error" id="site-gate-error"></p>
+  </form>
+</div>
+
+<script>
+(function () {
+  var HASH = "9cc282e579be8aa7c93e16715d762a2b851509e7720bbadce6bebd77d154cb82";
+  var STORE_KEY = "trainCatalogAuthed";
+  var storage = null;
+  try { storage = window.sessionStorage; } catch (e) { storage = null; }
+
+  var already = false;
+  try { already = !!storage && storage.getItem(STORE_KEY) === '1'; } catch (e) {}
+
+  function unlock() {
+    document.body.classList.remove('gate-locked');
+    var gate = document.getElementById('site-gate');
+    if (gate) gate.classList.add('hidden');
+    document.dispatchEvent(new Event('site-authed'));
+  }
+
+  if (already) {
+    unlock();
+  } else {
+    document.body.classList.add('gate-locked');
+  }
+
+  function sha256Hex(text) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+        return ('0' + b.toString(16)).slice(-2);
+      }).join('');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (already) return;
+    var form = document.getElementById('site-gate-form');
+    var input = document.getElementById('site-gate-input');
+    var error = document.getElementById('site-gate-error');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!window.crypto || !window.crypto.subtle) {
+        error.textContent = "This browser can't check the password here (needs https or localhost).";
+        return;
+      }
+      sha256Hex(input.value).then(function (hex) {
+        if (hex === HASH) {
+          try { storage && storage.setItem(STORE_KEY, '1'); } catch (e) {}
+          unlock();
+        } else {
+          error.textContent = 'Wrong password.';
+          input.value = '';
+          input.focus();
+        }
+      });
+    });
+  });
+})();
+</script>
+<div id="item-root">
+<a class="back" href="index.html">&larr; back to catalog</a>
+<h1 id="item-title"></h1>
+<p class="item-no-detail" id="item-no"></p>
+<span class="badge" id="item-badge"></span>
+<div class="item-photos" id="item-photos"></div>
+<dl id="item-dl"></dl>
+<div class="value" id="item-value" style="display:none"><strong>Value commentary</strong><p></p></div>
+<div class="notes" id="item-notes" style="display:none"><strong>Identification notes</strong><p></p></div>
+<footer><a href="disclaimer.html">Disclaimer</a></footer>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+  <button type="button" class="lightbox-nav prev" aria-label="Previous photo">&larr;</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <button type="button" class="lightbox-nav next" aria-label="Next photo">&rarr;</button>
+  <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+</div>
+
+<script>
+(function () {
+  function render() {
+    var id = new URLSearchParams(location.search).get('id');
+    fetch('data/catalog.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (items) {
+      var item = items.filter(function (it) { return it.id === id; })[0];
+      var root = document.getElementById('item-root');
+      if (!item) {
+        root.innerHTML = '';
+        var msg = document.createElement('p');
+        msg.className = 'item-not-found';
+        msg.textContent = 'Item not found.';
+        root.appendChild(msg);
+        return;
+      }
+
+      document.title = item.name;
+      document.getElementById('item-title').textContent = item.name;
+      document.getElementById('item-no').textContent = 'Item #' + item.number;
+      var badge = document.getElementById('item-badge');
+      badge.textContent = item.status_label;
+      badge.className = 'badge ' + item.status_css;
+
+      var dl = document.getElementById('item-dl');
+      dl.innerHTML = '';
+      item.rows.forEach(function (row) {
+        var dt = document.createElement('dt'); dt.textContent = row[0];
+        var dd = document.createElement('dd'); dd.textContent = row[1];
+        dl.appendChild(dt); dl.appendChild(dd);
+      });
+
+      var photosEl = document.getElementById('item-photos');
+      photosEl.innerHTML = '';
+      var thumbs = [];
+      item.photos.forEach(function (p) {
+        var img = document.createElement('img');
+        img.src = p.thumb; img.dataset.full = p.full; img.alt = p.alt;
+        photosEl.appendChild(img);
+        thumbs.push(img);
+      });
+
+      var valueEl = document.getElementById('item-value');
+      if (item.value_commentary) {
+        valueEl.querySelector('p').textContent = item.value_commentary;
+        valueEl.style.display = '';
+      }
+      var notesEl = document.getElementById('item-notes');
+      if (item.notes) {
+        notesEl.querySelector('p').textContent = item.notes;
+        notesEl.style.display = '';
+      }
+
+      // --- lightbox, wired up now that the photo <img> tags actually exist ---
+      var overlay = document.getElementById('lightbox');
+      if (!thumbs.length || !overlay) return;
+      var lbImg = document.getElementById('lightbox-img');
+      var prevBtn = overlay.querySelector('.lightbox-nav.prev');
+      var nextBtn = overlay.querySelector('.lightbox-nav.next');
+      var closeBtn = overlay.querySelector('.lightbox-close');
+      var current = 0;
+      function show(i) {
+        current = (i + thumbs.length) % thumbs.length;
+        lbImg.src = thumbs[current].dataset.full || thumbs[current].src;
+        lbImg.alt = thumbs[current].alt;
+      }
+      function openAt(i) { show(i); overlay.classList.add('open'); }
+      function close() { overlay.classList.remove('open'); }
+      thumbs.forEach(function (img, i) { img.addEventListener('click', function () { openAt(i); }); });
+      prevBtn.addEventListener('click', function () { show(current - 1); });
+      nextBtn.addEventListener('click', function () { show(current + 1); });
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+      });
+    });
+  }
+
+  if (document.body.classList.contains('gate-locked')) {
+    document.addEventListener('site-authed', render, { once: true });
+  } else {
+    document.addEventListener('DOMContentLoaded', render);
+  }
+})();
+</script>
+</body>
+</html>
