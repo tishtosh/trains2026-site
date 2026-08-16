@@ -1,11 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!--
+  This file is hand-maintained (as of 2026-08-16) -- scripts/build_site.py
+  writes it once if missing and never touches it again after that, so
+  edits here are safe from being overwritten by a rebuild. If you edit
+  scripts/build_site.py's shared CSS constant, the style.css?v=<hash> link
+  below won't pick up a fresh cache-busting hash automatically the way
+  item.html/disclaimer.html/value_report.html do (those are still
+  regenerated every run) -- bump the ?v= query string here by hand (any
+  new value works) so browsers refetch the updated style.css.
+-->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Train Collection Catalog</title>
-<link rel="stylesheet" href="style.css?v=905d180a8d">
+<link rel="stylesheet" href="style.css?v=055f547e58">
 </head>
 <body>
 
@@ -76,12 +86,14 @@
 })();
 </script>
 <header>
+  <div class="eyebrow" aria-label="Private Collection, Catalog">
+    <span>Private Collection</span><span class="eyebrow-sep" aria-hidden="true">/</span><span>Catalog</span>
+  </div>
   <h1>Train Collection Catalog</h1>
-  <p class="last-updated">Last updated August 16, 2026</p>
+  <p class="last-updated">Last updated August 16, 2026 pm</p>
   <p class="photo-notice">Unless otherwise noted, every photograph in this catalog depicts the actual item being documented. Images are unretouched and are intended to provide an accurate representation of each item&rsquo;s condition. Any adjustments are limited to cropping, orientation, and minor exposure or white-balance correction.</p>
 </header>
 <div class="view-controls" id="view-controls-root">
-  <p id="item-count" class="item-count">Loading catalog&hellip;</p>
   <button type="button" id="filters-toggle" class="filters-toggle" aria-expanded="false" style="display:none">
     <span class="filters-toggle-label">Filters</span><span class="arrow">&#9662;</span>
   </button>
@@ -150,7 +162,7 @@ window.initCatalogFilters = function () {
     if (statusEl) {
       statusEl.textContent = anyFilterActive()
         ? ('Showing ' + visible + ' of ' + cards.length + ' item(s).')
-        : '';
+        : 'Showing all ' + cards.length + ' item(s).';
     }
     // Shown on the "Filters" toggle button so a phone visitor can see how
     // many are active without expanding the (collapsed-by-default) panel.
@@ -182,6 +194,9 @@ window.initCatalogFilters = function () {
       apply();
     });
   }
+
+  // Populate the item count on initial load, before any filter is used.
+  apply();
 };
 </script>
 
@@ -318,7 +333,7 @@ window.initCatalogView = function () {
   var grid = document.getElementById('catalog-root');
   var filtersRoot = document.getElementById('filters-root');
   var viewControlsRoot = document.getElementById('view-controls-root');
-  var countEl = document.getElementById('item-count');
+  //var countEl = document.getElementById('item-count');
   if (!grid) return;
 
   function eraDecades(eraEstimate) {
@@ -466,9 +481,10 @@ window.initCatalogView = function () {
   }
 
   function render(items) {
-    if (countEl) {
-      countEl.textContent = items.length + ' item(s)';
-    }
+    //if (countEl) {
+    //   // countEl.textContent = items.length + ' item(s)';
+    //   countEl.textContent = '';
+    //}
 
     if (!items.length) {
       if (filtersRoot) filtersRoot.style.display = 'none';
@@ -493,9 +509,9 @@ window.initCatalogView = function () {
 
     if (filtersRoot) {
       var groups = [
-        tagGroup('Type', 'type', sortedTags(typeCounts)),
         tagGroup('Maker', 'manufacturer', sortedTags(makerCounts)),
         tagGroup('Gauge', 'gauge', sortedTags(gaugeCounts)),
+        tagGroup('Type', 'type', sortedTags(typeCounts)),
         tagGroup('Era', 'decade', sortedEraTags(decadeCounts)),
         tagGroup('Status', 'status', sortedTags(statusCounts))
       ].filter(Boolean);
@@ -541,8 +557,10 @@ window.initCatalogView = function () {
   }
 
   function boot() {
-    fetch('data/catalog.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(render).catch(function () {
-      if (countEl) countEl.textContent = 'Could not load the catalog -- try reloading the page.';
+    fetch('data/catalog.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(render).catch(function ()
+    {
+
+      // if (countEl) countEl.textContent = 'Could not load the catalog -- try reloading the page.';
     });
   }
 

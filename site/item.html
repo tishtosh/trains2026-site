@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Item — Train Collection Catalog</title>
-<link rel="stylesheet" href="style.css?v=905d180a8d">
+<link rel="stylesheet" href="style.css?v=055f547e58">
 </head>
 <body>
 
@@ -76,8 +76,16 @@
 })();
 </script>
 <div id="item-root">
-<a class="back" href="index.html">&larr; back to catalog</a>
-<h1 id="item-title"></h1>
+<header class="item-header">
+  <div class="eyebrow" aria-label="Private Collection, Catalog, Item">
+    <span>Private Collection</span><span class="eyebrow-sep" aria-hidden="true">/</span><a href="index.html">Catalog</a><span class="eyebrow-sep" aria-hidden="true">/</span><span id="item-breadcrumb-name"></span>
+    <nav class="item-nav" aria-label="Browse catalog items">
+      <a id="item-prev" href="#" aria-label="Previous item" title="Previous item">&lsaquo;</a>
+      <a id="item-next" href="#" aria-label="Next item" title="Next item">&rsaquo;</a>
+    </nav>
+  </div>
+  <h1 id="item-title"></h1>
+</header>
 <p class="item-no-detail" id="item-no"></p>
 <span class="badge" id="item-badge"></span>
 <div class="item-photos" id="item-photos"></div>
@@ -112,6 +120,21 @@
 
       document.title = item.name;
       document.getElementById('item-title').textContent = item.name;
+      document.getElementById('item-breadcrumb-name').textContent = item.name;
+      var orderedItems = items.slice().sort(function (a, b) {
+        return (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' });
+      });
+      var itemIndex = orderedItems.findIndex(function (it) { return it.id === item.id; });
+      var previousItem = orderedItems[(itemIndex - 1 + orderedItems.length) % orderedItems.length];
+      var nextItem = orderedItems[(itemIndex + 1) % orderedItems.length];
+      var previousLink = document.getElementById('item-prev');
+      var nextLink = document.getElementById('item-next');
+      previousLink.href = 'item.html?id=' + encodeURIComponent(previousItem.id);
+      previousLink.setAttribute('aria-label', 'Previous item: ' + previousItem.name);
+      previousLink.title = previousItem.name;
+      nextLink.href = 'item.html?id=' + encodeURIComponent(nextItem.id);
+      nextLink.setAttribute('aria-label', 'Next item: ' + nextItem.name);
+      nextLink.title = nextItem.name;
       document.getElementById('item-no').textContent = 'Item #' + item.number;
       var badge = document.getElementById('item-badge');
       badge.textContent = item.status_label;
