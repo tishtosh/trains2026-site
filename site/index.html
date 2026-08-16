@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Train Collection Catalog</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=905d180a8d">
 </head>
 <body>
 
@@ -77,15 +77,17 @@
 </script>
 <header>
   <h1>Train Collection Catalog</h1>
-  <p class="last-updated">Last updated August 15, 2026</p>
+  <p class="last-updated">Last updated August 16, 2026</p>
   <p class="photo-notice">Unless otherwise noted, every photograph in this catalog depicts the actual item being documented. Images are unretouched and are intended to provide an accurate representation of each item&rsquo;s condition. Any adjustments are limited to cropping, orientation, and minor exposure or white-balance correction.</p>
-  <p id="item-count">Loading catalog&hellip;</p>
 </header>
-<div id="filters-root"></div>
 <div class="view-controls" id="view-controls-root">
+  <p id="item-count" class="item-count">Loading catalog&hellip;</p>
+  <button type="button" id="filters-toggle" class="filters-toggle" aria-expanded="false" style="display:none">
+    <span class="filters-toggle-label">Filters</span><span class="arrow">&#9662;</span>
+  </button>
   <div class="view-toggle" role="group" aria-label="View as">
-    <button type="button" data-view="tiles" class="active">Tiles</button>
-    <button type="button" data-view="list">List</button>
+    <button type="button" data-view="tiles" class="active" aria-label="Tiles view" title="Tiles view"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="1" y="1" width="6" height="6" rx="1.2" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1.2" fill="currentColor"/><rect x="1" y="9" width="6" height="6" rx="1.2" fill="currentColor"/><rect x="9" y="9" width="6" height="6" rx="1.2" fill="currentColor"/></svg></button>
+    <button type="button" data-view="list" aria-label="List view" title="List view"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect x="1" y="2" width="14" height="3" rx="1" fill="currentColor"/><rect x="1" y="6.5" width="14" height="3" rx="1" fill="currentColor"/><rect x="1" y="11" width="14" height="3" rx="1" fill="currentColor"/></svg></button>
   </div>
   <div class="sort-controls" role="group" aria-label="Sort by">
     <span class="label">Sort by:</span>
@@ -95,8 +97,9 @@
     <button type="button" data-sort="gauge">Gauge<span class="arrow"></span></button>
     <button type="button" data-sort="era">Era<span class="arrow"></span></button>
   </div>
-  <button type="button" id="export-csv" class="export-btn">Export CSV</button>
+  <button type="button" id="export-csv" class="export-btn">Export CSV<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false"><path d="M6.5 3H4.4A1.4 1.4 0 0 0 3 4.4v7.2A1.4 1.4 0 0 0 4.4 13h7.2a1.4 1.4 0 0 0 1.4-1.4V9.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.7 3H13v4.3M12.6 3.4 7.3 8.7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"> (opens in a new window)</span></button>
 </div>
+<div id="filters-root"></div>
 <div class="grid" id="catalog-root"></div>
 <footer><a href="disclaimer.html">Disclaimer</a></footer>
 
@@ -119,9 +122,14 @@ window.initCatalogFilters = function () {
   var tagButtons = Array.prototype.slice.call(document.querySelectorAll('.tag'));
   var statusEl = document.getElementById('filter-status');
   var clearBtn = document.getElementById('clear-filters');
+  var toggleLabel = document.querySelector('#filters-toggle .filters-toggle-label');
+
+  function activeCount() {
+    return Object.keys(state).reduce(function (sum, g) { return sum + state[g].size; }, 0);
+  }
 
   function anyFilterActive() {
-    return Object.keys(state).some(function (g) { return state[g].size > 0; });
+    return activeCount() > 0;
   }
 
   function apply() {
@@ -143,6 +151,12 @@ window.initCatalogFilters = function () {
       statusEl.textContent = anyFilterActive()
         ? ('Showing ' + visible + ' of ' + cards.length + ' item(s).')
         : '';
+    }
+    // Shown on the "Filters" toggle button so a phone visitor can see how
+    // many are active without expanding the (collapsed-by-default) panel.
+    if (toggleLabel) {
+      var n = activeCount();
+      toggleLabel.textContent = n ? ('Filters (' + n + ')') : 'Filters';
     }
   }
 
@@ -409,6 +423,24 @@ window.initCatalogView = function () {
 
     var bodyEl = document.createElement('div');
     bodyEl.className = 'body';
+
+    // Badge goes first (its own line above the name) rather than trailing
+    // after meta/condition -- a needs-id/id-suggested item should read as
+    // "flagged, then here's what we know" rather than burying the flag
+    // below everything else, especially in list view where it used to only
+    // show up if the row happened to wrap.
+    var badge = document.createElement('span');
+    badge.className = 'badge ' + item.status_css;
+    badge.textContent = item.status_label;
+    bodyEl.appendChild(badge);
+
+    // Zero-size flex-line-break spacer (list view only, see .badge-break
+    // CSS) so the badge sits on its own line above the name without its
+    // own pill stretching to fill the row.
+    var badgeBreak = document.createElement('span');
+    badgeBreak.className = 'badge-break ' + item.status_css;
+    bodyEl.appendChild(badgeBreak);
+
     var h3 = document.createElement('h3');
     h3.textContent = item.name;
     bodyEl.appendChild(h3);
@@ -429,18 +461,13 @@ window.initCatalogView = function () {
       bodyEl.appendChild(cond);
     }
 
-    var badge = document.createElement('span');
-    badge.className = 'badge ' + item.status_css;
-    badge.textContent = item.status_label;
-    bodyEl.appendChild(badge);
-
     a.appendChild(bodyEl);
     return a;
   }
 
   function render(items) {
     if (countEl) {
-      countEl.textContent = items.length + ' item(s) \u00b7 browse below for details, photos, and identification notes.';
+      countEl.textContent = items.length + ' item(s)';
     }
 
     if (!items.length) {
@@ -457,6 +484,12 @@ window.initCatalogView = function () {
       eraDecades(it.era_estimate).forEach(function (d) { bump(decadeCounts, d); });
       bump(statusCounts, it.status_label);
     });
+
+    // The toggle button itself is static markup in the .view-controls row
+    // (see build_index()) so it sits alongside item count / view / sort /
+    // export in one row -- this just wires it up and reveals it once we
+    // know there's actually a .filters panel behind it to show.
+    var filtersToggle = document.getElementById('filters-toggle');
 
     if (filtersRoot) {
       var groups = [
@@ -476,11 +509,25 @@ window.initCatalogView = function () {
         clearBtn.className = 'clear';
         clearBtn.textContent = 'Clear filters';
         filtersBox.appendChild(clearBtn);
+
+        // Filters start collapsed in every view/screen size (2026-08-16,
+        // user request -- previously only collapsed on phones).
+        if (filtersToggle) {
+          filtersToggle.style.display = '';
+          filtersToggle.addEventListener('click', function () {
+            var open = filtersBox.classList.toggle('open');
+            filtersToggle.classList.toggle('open', open);
+            filtersToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+        }
+
         filtersRoot.appendChild(filtersBox);
         var statusP = document.createElement('p');
         statusP.id = 'filter-status';
         statusP.className = 'filter-status';
         filtersRoot.appendChild(statusP);
+      } else if (filtersToggle) {
+        filtersToggle.style.display = 'none';
       }
     }
 
