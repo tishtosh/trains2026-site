@@ -77,1135 +77,35 @@
 </script>
 <header>
   <h1>Train Collection Catalog</h1>
+  <p class="last-updated">Last updated August 15, 2026</p>
   <p class="photo-notice">Unless otherwise noted, every photograph in this catalog depicts the actual item being documented. Images are unretouched and are intended to provide an accurate representation of each item&rsquo;s condition. Any adjustments are limited to cropping, orientation, and minor exposure or white-balance correction.</p>
-  <p>52 item(s) &middot; browse below for details, photos, and identification notes.</p>
+  <p id="item-count">Loading catalog&hellip;</p>
 </header>
-
-<div class="filters">
-  <div class="tag-group">
-    <h3>Type</h3>
-    <div class="tags">
-      <button type="button" class="tag" data-group="type" data-value="Freight Car">Freight Car <span class="count">15</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Locomotive">Locomotive <span class="count">8</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Signal / Accessory">Signal / Accessory <span class="count">8</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Track">Track <span class="count">7</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Passenger Car">Passenger Car <span class="count">3</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Starter Set">Starter Set <span class="count">3</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Transformer / Power">Transformer / Power <span class="count">3</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Station / Building">Station / Building <span class="count">2</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Accessory / Vehicle">Accessory / Vehicle <span class="count">1</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Station / Accessory">Station / Accessory <span class="count">1</span></button>
-      <button type="button" class="tag" data-group="type" data-value="Vehicle / Playset">Vehicle / Playset <span class="count">1</span></button>
-    </div>
-  </div>
-  <div class="tag-group">
-    <h3>Maker</h3>
-    <div class="tags">
-      <button type="button" class="tag" data-group="manufacturer" data-value="Lionel">Lionel <span class="count">32</span></button>
-      <button type="button" class="tag" data-group="manufacturer" data-value="LGB (Lehmann Gross Bahn)">LGB (Lehmann Gross Bahn) <span class="count">12</span></button>
-      <button type="button" class="tag" data-group="manufacturer" data-value="Bachmann">Bachmann <span class="count">3</span></button>
-      <button type="button" class="tag" data-group="manufacturer" data-value="Life-Like">Life-Like <span class="count">2</span></button>
-      <button type="button" class="tag" data-group="manufacturer" data-value="MRC">MRC <span class="count">1</span></button>
-      <button type="button" class="tag" data-group="manufacturer" data-value="Noma Lites, Inc.">Noma Lites, Inc. <span class="count">1</span></button>
-      <button type="button" class="tag" data-group="manufacturer" data-value="Tyco Industries Inc.">Tyco Industries Inc. <span class="count">1</span></button>
-    </div>
-  </div>
-  <div class="tag-group">
-    <h3>Gauge</h3>
-    <div class="tags">
-      <button type="button" class="tag" data-group="gauge" data-value="O gauge">O gauge <span class="count">34</span></button>
-      <button type="button" class="tag" data-group="gauge" data-value="G scale (45mm)">G scale (45mm) <span class="count">17</span></button>
-      <button type="button" class="tag" data-group="gauge" data-value="HO scale">HO scale <span class="count">2</span></button>
-      <button type="button" class="tag" data-group="gauge" data-value="Metric">Metric <span class="count">1</span></button>
-      <button type="button" class="tag" data-group="gauge" data-value="Narrow Gauge (45mm)">Narrow Gauge (45mm) <span class="count">1</span></button>
-      <button type="button" class="tag" data-group="gauge" data-value="O Gauge (Three-Rail)">O Gauge (Three-Rail) <span class="count">1</span></button>
-      <button type="button" class="tag" data-group="gauge" data-value="S gauge">S gauge <span class="count">1</span></button>
-    </div>
-  </div>
-  <div class="tag-group">
-    <h3>Era</h3>
-    <div class="tags">
-      <button type="button" class="tag" data-group="decade" data-value="1940s">1940s <span class="count">11</span></button>
-      <button type="button" class="tag" data-group="decade" data-value="1950s">1950s <span class="count">33</span></button>
-      <button type="button" class="tag" data-group="decade" data-value="1960s">1960s <span class="count">23</span></button>
-      <button type="button" class="tag" data-group="decade" data-value="1970s">1970s <span class="count">5</span></button>
-      <button type="button" class="tag" data-group="decade" data-value="1980s">1980s <span class="count">11</span></button>
-      <button type="button" class="tag" data-group="decade" data-value="1990s">1990s <span class="count">16</span></button>
-      <button type="button" class="tag" data-group="decade" data-value="2000s">2000s <span class="count">7</span></button>
-      <button type="button" class="tag" data-group="decade" data-value="2010s">2010s <span class="count">2</span></button>
-    </div>
-  </div>
-  <div class="tag-group">
-    <h3>Status</h3>
-    <div class="tags">
-      <button type="button" class="tag" data-group="status" data-value="Cataloged">Cataloged <span class="count">52</span></button>
-    </div>
-  </div>
-  <button type="button" id="clear-filters" class="clear">Clear filters</button>
-</div>
-<p id="filter-status" class="filter-status"></p>
-
-<div class="view-controls">
+<div id="filters-root"></div>
+<div class="view-controls" id="view-controls-root">
   <div class="view-toggle" role="group" aria-label="View as">
     <button type="button" data-view="tiles" class="active">Tiles</button>
     <button type="button" data-view="list">List</button>
   </div>
   <div class="sort-controls" role="group" aria-label="Sort by">
     <span class="label">Sort by:</span>
-    <button type="button" data-sort="name" class="active">Name</button>
-    <button type="button" data-sort="item">Item</button>
-    <button type="button" data-sort="maker">Maker</button>
-    <button type="button" data-sort="gauge">Gauge</button>
-    <button type="button" data-sort="era">Era</button>
+    <button type="button" data-sort="name" class="active">Name<span class="arrow"></span></button>
+    <button type="button" data-sort="item">Item<span class="arrow"></span></button>
+    <button type="button" data-sort="maker">Maker<span class="arrow"></span></button>
+    <button type="button" data-sort="gauge">Gauge<span class="arrow"></span></button>
+    <button type="button" data-sort="era">Era<span class="arrow"></span></button>
   </div>
   <button type="button" id="export-csv" class="export-btn">Export CSV</button>
 </div>
-<div class="grid">
-
-  <a class="card" href="item.html?id=item-062"
-     data-type="Locomotive"
-     data-manufacturer="Bachmann"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1980s 1990s"
-     data-status="Cataloged"
-     data-name="bachmann #8254 steam locomotive 4-6-0 tender set"
-     data-era-min="1980"
-     data-item-no="62">
-    <span class="item-no">#062</span>
-    <img src="thumbs/item-062/item-062-01.jpg" alt="Bachmann #8254 Steam Locomotive 4-6-0 Tender Set">
-    <div class="body">
-      <h3>Bachmann #8254 Steam Locomotive 4-6-0 Tender Set</h3>
-      <div class="meta">Locomotive &middot; Bachmann &middot; G scale (45mm) &middot; 1980-1990</div>
-      <div class="condition" title="Very good. Paint is bright and well-applied. No visible cracks in the boiler. Windows are clear. Motor assembly appears complete and intact. Coal load in tender intact with no loose material visible.">Very good. Paint is bright and well-applied. No visible cracks in the boiler. Windows are clear. Motor assembly appears complete and intact. Coal load in tender intact with no loose material visible.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-036"
-     data-type="Locomotive"
-     data-manufacturer="Bachmann"
-     data-gauge="Narrow Gauge (45mm)"
-     data-gauges="Narrow Gauge (45mm)"
-     data-decades="1990s 2000s 2010s"
-     data-status="Cataloged"
-     data-name="bachmann 2-8-0 narrow gauge consolidation locomotive #81299"
-     data-era-min="1990"
-     data-item-no="36">
-    <span class="item-no">#036</span>
-    <img src="thumbs/item-036/item-036-09.jpg" alt="Bachmann 2-8-0 Narrow Gauge Consolidation Locomotive #81299">
-    <div class="body">
-      <h3>Bachmann 2-8-0 Narrow Gauge Consolidation Locomotive #81299</h3>
-      <div class="meta">Locomotive &middot; Bachmann &middot; Narrow Gauge (45mm) &middot; 1990-2010</div>
-      <div class="condition" title="Excellent. The paint is clean and sharp, metal details are bright, no visible wear or damage.">Excellent. The paint is clean and sharp, metal details are bright, no visible wear or damage.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-037"
-     data-type="Locomotive"
-     data-manufacturer="Bachmann"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1990s 2000s 2010s"
-     data-status="Cataloged"
-     data-name="bachmann spectrum 36 ton 2-truck shay, ely-thomas lumber co. #5"
-     data-era-min="1990"
-     data-item-no="37">
-    <span class="item-no">#037</span>
-    <img src="thumbs/item-037/item-037-01.jpg" alt="Bachmann Spectrum 36 Ton 2-Truck Shay, Ely-Thomas Lumber Co. #5">
-    <div class="body">
-      <h3>Bachmann Spectrum 36 Ton 2-Truck Shay, Ely-Thomas Lumber Co. #5</h3>
-      <div class="meta">Locomotive &middot; Bachmann &middot; G scale (45mm) &middot; 1990-2010</div>
-      <div class="condition" title="Excellent. Paint is sharp and even. No visible chips, cracks, or corrosion. All moving parts appear intact. Wheels are clean and look operational.">Excellent. Paint is sharp and even. No visible chips, cracks, or corrosion. All moving parts appear intact. Wheels are clean and look operational.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-022"
-     data-type="Track"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1990s"
-     data-status="Cataloged"
-     data-name="lgb 1000 brass track set - 12 straight sections (300mm)"
-     data-era-min="1990"
-     data-item-no="22">
-    <span class="item-no">#022</span>
-    <img src="thumbs/item-022/item-022-03.jpg" alt="LGB 1000 Brass Track Set - 12 Straight Sections (300mm)">
-    <div class="body">
-      <h3>LGB 1000 Brass Track Set - 12 Straight Sections (300mm)</h3>
-      <div class="meta">Track &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1990s</div>
-      <div class="condition" title="Box shows wear, age-spotting, and creasing typical of 1990s storage. Contents appear clean and largely unused. Brass rails show minor tarnish but no significant corrosion or damage. Plastic ties are intact and show no cracking.">Box shows wear, age-spotting, and creasing typical of 1990s storage. Contents appear clean and largely unused. Brass rails show minor tarnish but no significant corrosion or damage. Plastic ties are intact and show no cracking.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-016"
-     data-type="Track"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1990s"
-     data-status="Cataloged"
-     data-name="lgb 10000 straight track section (300mm, 12-pack)"
-     data-era-min="1990"
-     data-item-no="16">
-    <span class="item-no">#016</span>
-    <img src="thumbs/item-016/item-016-04.jpg" alt="LGB 10000 Straight Track Section (300mm, 12-pack)">
-    <div class="body">
-      <h3>LGB 10000 Straight Track Section (300mm, 12-pack)</h3>
-      <div class="meta">Track &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1990s</div>
-      <div class="condition" title="Box shows minor wear with corner creases and some surface scuffing, but all panels intact. Track pieces inside appear clean and undamaged. Brass rails and plastic ties show no rust or corrosion.">Box shows minor wear with corner creases and some surface scuffing, but all panels intact. Track pieces inside appear clean and undamaged. Brass rails and plastic ties show no rust or corrosion.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-035"
-     data-type="Locomotive"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1980s 1990s 2000s"
-     data-status="Cataloged"
-     data-name="lgb 2217 d steam locomotive with tender"
-     data-era-min="1980"
-     data-item-no="35">
-    <span class="item-no">#035</span>
-    <img src="thumbs/item-035/item-035-16.jpg" alt="LGB 2217 D Steam Locomotive with Tender">
-    <div class="body">
-      <h3>LGB 2217 D Steam Locomotive with Tender</h3>
-      <div class="meta">Locomotive &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1980-2000</div>
-      <div class="condition" title="Good. The paint and gold lettering on both locomotive and tender show normal wear and light scratches. The cab interior and wheel mechanisms appear clean and functional. The coal load is intact in the tender.">Good. The paint and gold lettering on both locomotive and tender show normal wear and light scratches. The cab interior and wheel mechanisms appear clean and functional. The coal load is intact in the tender.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-002"
-     data-type="Freight Car"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1980s 1990s"
-     data-status="Cataloged"
-     data-name="lgb 4021 ct christmas train freight car"
-     data-era-min="1980"
-     data-item-no="2">
-    <span class="item-no">#002</span>
-    <img src="thumbs/item-002/item-002-06.jpg" alt="LGB 4021 CT Christmas Train Freight Car">
-    <div class="body">
-      <h3>LGB 4021 CT Christmas Train Freight Car</h3>
-      <div class="meta">Freight Car &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1982-1990</div>
-      <div class="condition" title="Very good; original box shows minor shelf wear but retains strong color and gloss. Lithography on car gates appears bright with no major fade. Car itself shows minimal play wear, couplers intact.">Very good; original box shows minor shelf wear but retains strong color and gloss. Lithography on car gates appears bright with no major fade. Car itself shows minimal play wear, couplers intact.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-015"
-     data-type="Locomotive"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1980s 1990s"
-     data-status="Cataloged"
-     data-name="lgb 4049 hilfszug-wagen maintenance locomotive"
-     data-era-min="1980"
-     data-item-no="15">
-    <span class="item-no">#015</span>
-    <img src="thumbs/item-015/item-015-04.jpg" alt="LGB 4049 Hilfszug-Wagen Maintenance Locomotive">
-    <div class="body">
-      <h3>LGB 4049 Hilfszug-Wagen Maintenance Locomotive</h3>
-      <div class="meta">Locomotive &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1980-1995</div>
-      <div class="condition" title="Box shows age and minor wear; model itself is clean with minimal play wear visible. All major components appear intact including searchlight, platform railings, and couplers.">Box shows age and minor wear; model itself is clean with minimal play wear visible. All major components appear intact including searchlight, platform railings, and couplers.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-012"
-     data-type="Freight Car"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1970s 1980s 1990s"
-     data-status="Cataloged"
-     data-name="lgb 4065 rio grande caboose"
-     data-era-min="1970"
-     data-item-no="12">
-    <span class="item-no">#012</span>
-    <img src="thumbs/item-012/item-012-04.jpg" alt="LGB 4065 Rio Grande Caboose">
-    <div class="body">
-      <h3>LGB 4065 Rio Grande Caboose</h3>
-      <div class="meta">Freight Car &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1970s-1990s</div>
-      <div class="condition" title="The box shows wear consistent with age and storage. The caboose itself appears to be in good condition with no visible cracks or major paint loss, though there is some minor wear visible on the roof and edges.">The box shows wear consistent with age and storage. The caboose itself appears to be in good condition with no visible cracks or major paint loss, though there is some minor wear visible on the roof and edges.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-001"
-     data-type="Freight Car"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1980s 1990s 2000s"
-     data-status="Cataloged"
-     data-name="lgb 4135 s sound boxcar"
-     data-era-min="1980"
-     data-item-no="1">
-    <span class="item-no">#001</span>
-    <img src="thumbs/item-001/item-001-04.jpg" alt="LGB 4135 S Sound Boxcar">
-    <div class="body">
-      <h3>LGB 4135 S Sound Boxcar</h3>
-      <div class="meta">Freight Car &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1980-2000</div>
-      <div class="condition" title="Box: moderate wear, minor creasing on edges. Car itself appears excellent, with clean paint and no visible damage to body or mechanisms.">Box: moderate wear, minor creasing on edges. Car itself appears excellent, with clean paint and no visible damage to body or mechanisms.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-013"
-     data-type="Freight Car"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1980s 1990s 2000s"
-     data-status="Cataloged"
-     data-name="lgb 4240 mobil tanker car"
-     data-era-min="1980"
-     data-item-no="13">
-    <span class="item-no">#013</span>
-    <img src="thumbs/item-013/item-013-06.jpg" alt="LGB 4240 Mobil Tanker Car">
-    <div class="body">
-      <h3>LGB 4240 Mobil Tanker Car</h3>
-      <div class="meta">Freight Car &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1980-2000</div>
-      <div class="condition" title="Good. Paint and lithography show minimal wear. The silver finish on the tank is bright. Box shows age-related creasing but is intact.">Good. Paint and lithography show minimal wear. The silver finish on the tank is bright. Box shows age-related creasing but is intact.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-014"
-     data-type="Track"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1990s 2000s"
-     data-status="Cataloged"
-     data-name="lgb 51330 curved track set (12 × r1-30° curves)"
-     data-era-min="1990"
-     data-item-no="14">
-    <span class="item-no">#014</span>
-    <img src="thumbs/item-014/item-014-03.jpg" alt="LGB 51330 Curved Track Set (12 × R1-30° curves)">
-    <div class="body">
-      <h3>LGB 51330 Curved Track Set (12 × R1-30° curves)</h3>
-      <div class="meta">Track &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1990-2000</div>
-      <div class="condition" title="Box shows light wear, minor creasing, and a red sticker on one corner. Contents appear unused or lightly handled. Track sections show no rust or oxidation.">Box shows light wear, minor creasing, and a red sticker on one corner. Contents appear unused or lightly handled. Track sections show no rust or oxidation.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-008"
-     data-type="Track"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1990s"
-     data-status="Cataloged"
-     data-name="lgb brass track assortment - 1000 x 12 (300mm sections)"
-     data-era-min="1990"
-     data-item-no="8">
-    <span class="item-no">#008</span>
-    <img src="thumbs/item-008/item-008-01.jpg" alt="LGB Brass Track Assortment - 1000 x 12 (300mm sections)">
-    <div class="body">
-      <h3>LGB Brass Track Assortment - 1000 x 12 (300mm sections)</h3>
-      <div class="meta">Track &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1990s</div>
-      <div class="condition" title="Box Fair to Good (worn corners, faded graphics, storage creasing); Track Excellent (appears unused, minimal oxidation on brass)">Box Fair to Good (worn corners, faded graphics, storage creasing); Track Excellent (appears unused, minimal oxidation on brass)</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-017"
-     data-type="Track"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1990s"
-     data-status="Cataloged"
-     data-name="lgb curved track r1-30° (12 x 1100)"
-     data-era-min="1990"
-     data-item-no="17">
-    <span class="item-no">#017</span>
-    <img src="thumbs/item-017/item-017-04.jpg" alt="LGB Curved Track R1-30° (12 x 1100)">
-    <div class="body">
-      <h3>LGB Curved Track R1-30° (12 x 1100)</h3>
-      <div class="meta">Track &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1990s</div>
-      <div class="condition" title="Good. Box shows typical wear and aging but is intact. Contents appear clean and unused or very lightly used.">Good. Box shows typical wear and aging but is intact. Contents appear clean and unused or very lightly used.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-020"
-     data-type="Track"
-     data-manufacturer="LGB (Lehmann Gross Bahn)"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1980s 1990s 2000s"
-     data-status="Cataloged"
-     data-name="lgb r 775 curved track set (12 × 1500)"
-     data-era-min="1980"
-     data-item-no="20">
-    <span class="item-no">#020</span>
-    <img src="thumbs/item-020/item-020-03.jpg" alt="LGB R 775 Curved Track Set (12 × 1500)">
-    <div class="body">
-      <h3>LGB R 775 Curved Track Set (12 × 1500)</h3>
-      <div class="meta">Track &middot; LGB (Lehmann Gross Bahn) &middot; G scale (45mm) &middot; 1980-2000</div>
-      <div class="condition" title="Box shows wear and creasing from age and storage. The track itself appears to be in good condition with brass rails and black plastic ties intact. Rails show normal oxidation and patina consistent with age. No visible corrosion, cracks, or bent sections.">Box shows wear and creasing from age and storage. The track itself appears to be in good condition with brass rails and black plastic ties intact. Rails show normal oxidation and patina consistent with age. No visible corrosion, cracks, or bent sections.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-018"
-     data-type="Starter Set"
-     data-manufacturer="Life-Like"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1960s"
-     data-status="Cataloged"
-     data-name="life-like lighted operating sempaphore"
-     data-era-min="1960"
-     data-item-no="18">
-    <span class="item-no">#018</span>
-    <img src="thumbs/item-018/item-018-01.jpg" alt="Life-Like Lighted Operating Sempaphore">
-    <div class="body">
-      <h3>Life-Like Lighted Operating Sempaphore</h3>
-      <div class="meta">Starter Set &middot; Life-Like &middot; G scale (45mm) &middot; 1963</div>
-      <div class="condition" title="Good. Box shows typical age wear and creasing. The semaphore signal appears complete with functioning arm mechanism. Track and base platform present. No visible cracks or major damage to plastic components.">Good. Box shows typical age wear and creasing. The semaphore signal appears complete with functioning arm mechanism. Track and base platform present. No visible cracks or major damage to plastic components.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-019"
-     data-type="Signal / Accessory"
-     data-manufacturer="Life-Like"
-     data-gauge="G scale (45mm)"
-     data-gauges="G scale (45mm)"
-     data-decades="1970s 1980s"
-     data-status="Cataloged"
-     data-name="life-like operating grade crossing signal with light base"
-     data-era-min="1970"
-     data-item-no="19">
-    <span class="item-no">#019</span>
-    <img src="thumbs/item-019/item-019-01.jpg" alt="Life-Like Operating Grade Crossing Signal with Light Base">
-    <div class="body">
-      <h3>Life-Like Operating Grade Crossing Signal with Light Base</h3>
-      <div class="meta">Signal / Accessory &middot; Life-Like &middot; G scale (45mm) &middot; 1970s–1980s</div>
-      <div class="condition" title="Good. Box shows wear and color fading typical of decades of storage. The crossing signal itself appears complete with the red crossing lights intact, and the base and instruction materials are all present. Some dust and minor scuffing visible on the plastic components.">Good. Box shows wear and color fading typical of decades of storage. The crossing signal itself appears complete with the red crossing lights intact, and the base and instruction materials are all present. Some dust and minor scuffing visible on the plastic components.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-057"
-     data-type="Signal / Accessory"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 112 remote control super &quot;o&quot; switches (one pair)"
-     data-era-min="1940"
-     data-item-no="57">
-    <span class="item-no">#057</span>
-    <img src="thumbs/item-057/item-057-05.jpg" alt="Lionel 112 Remote Control Super &quot;O&quot; Switches (One Pair)">
-    <div class="body">
-      <h3>Lionel 112 Remote Control Super &quot;O&quot; Switches (One Pair)</h3>
-      <div class="meta">Signal / Accessory &middot; Lionel &middot; O gauge &middot; postwar (1945-1969)</div>
-      <div class="condition" title="Good. Box shows age and wear with minor creasing and soiling. Contents appear complete and functional. Metal components show surface oxidation and wear consistent with age, but all parts are present and intact. Wires and connectors appear secure.">Good. Box shows age and wear with minor creasing and soiling. Contents appear complete and functional. Metal components show surface oxidation and wear consistent with age, but all parts are present and intact. Wires and connectors appear secure.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-032"
-     data-type="Locomotive"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s"
-     data-status="Cataloged"
-     data-name="lionel 2350 new haven electric locomotive"
-     data-era-min="1950"
-     data-item-no="32">
-    <span class="item-no">#032</span>
-    <img src="thumbs/item-032/item-032-01.jpg" alt="Lionel 2350 New Haven Electric Locomotive">
-    <div class="body">
-      <h3>Lionel 2350 New Haven Electric Locomotive</h3>
-      <div class="meta">Locomotive &middot; Lionel &middot; O gauge &middot; 1950-1956</div>
-      <div class="condition" title="Good. Paint and lettering show normal wear. Pantograph is intact. Couplers are present. Light paint loss and scratches consistent with age and play use. The box shows age with creasing and wear but is intact.">Good. Paint and lettering show normal wear. Pantograph is intact. Couplers are present. Light paint loss and scratches consistent with age and play use. The box shows age with creasing and wear but is intact.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-046"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s"
-     data-status="Cataloged"
-     data-name="lionel 3419 helicopter car"
-     data-era-min="1950"
-     data-item-no="46">
-    <span class="item-no">#046</span>
-    <img src="thumbs/item-046/item-046-01.jpg" alt="Lionel 3419 Helicopter Car">
-    <div class="body">
-      <h3>Lionel 3419 Helicopter Car</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; 1950-1955</div>
-      <div class="condition" title="Good to fair. The blue flatcar paint is bright but shows some minor wear and age spotting. The helicopter has tarnish on the metal propeller blades and some minor paint chips on the gray fuselage. The support brackets and yellow legs show general play wear. Couplers and trucks are intact and functional.">Good to fair. The blue flatcar paint is bright but shows some minor wear and age spotting. The helicopter has tarnish on the metal propeller blades and some minor paint chips on the gray fuselage. The support brackets and yellow legs show general play wear. Couplers and trucks are intact and functional.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-061"
-     data-type="Signal / Accessory"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 342 operating culvert loader"
-     data-era-min="1940"
-     data-item-no="61">
-    <span class="item-no">#061</span>
-    <img src="thumbs/item-061/item-061-12.jpg" alt="Lionel 342 Operating Culvert Loader">
-    <div class="body">
-      <h3>Lionel 342 Operating Culvert Loader</h3>
-      <div class="meta">Signal / Accessory &middot; Lionel &middot; O gauge &middot; postwar (1945-1969)</div>
-      <div class="condition" title="Good. Mechanism intact. Paint shows light wear and fading on cream base and gantry frame. Red paint on building and gantry bright with minor age patina. Metal culvert pipes show normal surface wear. Control switch functional. Missing original instruction materials visible in box.">Good. Mechanism intact. Paint shows light wear and fading on cream base and gantry frame. Red paint on building and gantry bright with minor age patina. Metal culvert pipes show normal surface wear. Control switch functional. Missing original instruction materials visible in box.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-049"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s"
-     data-status="Cataloged"
-     data-name="lionel 3444 erie operating gondola with machinery load"
-     data-era-min="1950"
-     data-item-no="49">
-    <span class="item-no">#049</span>
-    <img src="thumbs/item-049/item-049-01.jpg" alt="Lionel 3444 Erie Operating Gondola with Machinery Load">
-    <div class="body">
-      <h3>Lionel 3444 Erie Operating Gondola with Machinery Load</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; 1950-1952</div>
-      <div class="condition" title="Good overall. Red paint is bright with minor wear and fading in spots. Cream lettering is intact and legible. Machinery load pieces show age-appropriate wear and patina. Couplers function; wheels turn freely. Some surface dust and light oxidation on metal parts visible in close-up photos.">Good overall. Red paint is bright with minor wear and fading in spots. Cream lettering is intact and legible. Machinery load pieces show age-appropriate wear and patina. Couplers function; wheels turn freely. Some surface dust and light oxidation on metal parts visible in close-up photos.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-041"
-     data-type="Station / Accessory"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 345 operating culvert unloader"
-     data-era-min="1940"
-     data-item-no="41">
-    <span class="item-no">#041</span>
-    <img src="thumbs/item-041/item-041-04.jpg" alt="Lionel 345 Operating Culvert Unloader">
-    <div class="body">
-      <h3>Lionel 345 Operating Culvert Unloader</h3>
-      <div class="meta">Station / Accessory &middot; Lionel &middot; O gauge &middot; postwar (1945-1969)</div>
-      <div class="condition" title="Good. Box shows age and edge wear, consistent with decades of storage. The accessory mechanisms appear complete and functional with appropriate wear. Metal cylinders show patina. Paint is vibrant but shows light dust and handling marks.">Good. Box shows age and edge wear, consistent with decades of storage. The accessory mechanisms appear complete and functional with appropriate wear. Metal cylinders show patina. Paint is vibrant but shows light dust and handling marks.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-055"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s"
-     data-status="Cataloged"
-     data-name="lionel 3456 norfolk and western freight car with load"
-     data-era-min="1950"
-     data-item-no="55">
-    <span class="item-no">#055</span>
-    <img src="thumbs/item-055/item-055-01.jpg" alt="Lionel 3456 Norfolk and Western Freight Car with Load">
-    <div class="body">
-      <h3>Lionel 3456 Norfolk and Western Freight Car with Load</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; 1950-1958</div>
-      <div class="condition" title="Good overall. Paint and lettering remain clean and legible. Some light scuffing and wear visible on the body. Coal load is present. Couplers and trucks function properly. Original plastic cellophane wrapping around coal load is present but aged.">Good overall. Paint and lettering remain clean and legible. Some light scuffing and wear visible on the body. Coal load is present. Couplers and trucks function properly. Original plastic cellophane wrapping around coal load is present but aged.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-047"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 3461 lumber car"
-     data-era-min="1940"
-     data-item-no="47">
-    <span class="item-no">#047</span>
-    <img src="thumbs/item-047/item-047-01.jpg" alt="Lionel 3461 Lumber Car">
-    <div class="body">
-      <h3>Lionel 3461 Lumber Car</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; postwar (1945–1969)</div>
-      <div class="condition" title="Fair. Paint shows moderate wear and fading consistent with age. All stake posts are present and intact. Couplers function. Some dust and light oxidation visible on the chassis. No major damage.">Fair. Paint shows moderate wear and fading consistent with age. All stake posts are present and intact. Couplers function. Some dust and light oxidation visible on the chassis. No major damage.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-054"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s"
-     data-status="Cataloged"
-     data-name="lionel 3464 at&amp;sf operating boxcar"
-     data-era-min="1950"
-     data-item-no="54">
-    <span class="item-no">#054</span>
-    <img src="thumbs/item-054/item-054-01.jpg" alt="Lionel 3464 AT&amp;SF Operating Boxcar">
-    <div class="body">
-      <h3>Lionel 3464 AT&amp;SF Operating Boxcar</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; 1950-1956</div>
-      <div class="condition" title="Good. The orange paint shows age and light wear. The black operating door and roof walk appear intact. The frame and trucks are in working order.">Good. The orange paint shows age and light wear. The black operating door and roof walk appear intact. The frame and trucks are in working order.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-031"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s"
-     data-status="Cataloged"
-     data-name="lionel 3469 automatic dump car"
-     data-era-min="1940"
-     data-item-no="31">
-    <span class="item-no">#031</span>
-    <img src="thumbs/item-031/item-031-01.jpg" alt="Lionel 3469 Automatic Dump Car">
-    <div class="body">
-      <h3>Lionel 3469 Automatic Dump Car</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; 1949-1952</div>
-      <div class="condition" title="Fair to good. The car shows age and wear consistent with play use and storage over many decades. Paint is worn and scuffed in places. Wheels and trucks appear functional. No major damage visible, though detail is softer due to age.">Fair to good. The car shows age and wear consistent with play use and storage over many decades. Paint is worn and scuffed in places. Wheels and trucks appear functional. No major damage visible, though detail is softer due to age.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-027"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 3520 searchlight car"
-     data-era-min="1940"
-     data-item-no="27">
-    <span class="item-no">#027</span>
-    <img src="thumbs/item-027/item-027-01.jpg" alt="Lionel 3520 Searchlight Car">
-    <div class="body">
-      <h3>Lionel 3520 Searchlight Car</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; postwar (1945-1969)</div>
-      <div class="condition" title="Good. The gray painted base shows some wear and paint chipping. The searchlight mechanism appears intact and functional. The red plastic load is free of major cracks. Wheels and trucks show age and oxidation but no major damage.">Good. The gray painted base shows some wear and paint chipping. The searchlight mechanism appears intact and functional. The red plastic load is free of major cracks. Wheels and trucks show age and oxidation but no major damage.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-044"
-     data-type="Passenger Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s"
-     data-status="Cataloged"
-     data-name="lionel 3530 electro-motive power observation car"
-     data-era-min="1950"
-     data-item-no="44">
-    <span class="item-no">#044</span>
-    <img src="thumbs/item-044/item-044-01.jpg" alt="Lionel 3530 Electro-Motive Power Observation Car">
-    <div class="body">
-      <h3>Lionel 3530 Electro-Motive Power Observation Car</h3>
-      <div class="meta">Passenger Car &middot; Lionel &middot; O gauge &middot; 1952-1956</div>
-      <div class="condition" title="Good. Paint has wear and light scuffing, particularly on the roof and lower sides. The metal motor housing and internal mechanisms show age patina. Windows are intact but show age clouding. All main structural parts present and solid. Couplers functional.">Good. Paint has wear and light scuffing, particularly on the roof and lower sides. The metal motor housing and internal mechanisms show age patina. Windows are intact but show age clouding. All main structural parts present and solid. Couplers functional.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-038"
-     data-type="Signal / Accessory"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 397 coal elevator operating accessory"
-     data-era-min="1940"
-     data-item-no="38">
-    <span class="item-no">#038</span>
-    <img src="thumbs/item-038/item-038-01.jpg" alt="Lionel 397 Coal Elevator Operating Accessory">
-    <div class="body">
-      <h3>Lionel 397 Coal Elevator Operating Accessory</h3>
-      <div class="meta">Signal / Accessory &middot; Lionel &middot; O gauge &middot; postwar (1945-1969)</div>
-      <div class="condition" title="Good. Original paint on main housing and elevator arm is glossy but shows light wear. Some scratching and scuffing on the gray base plate. The blue generator/motor unit has minor paint loss. Metal rail sections show tarnish and aging. Coupler mechanism appears functional.">Good. Original paint on main housing and elevator arm is glossy but shows light wear. Some scratching and scuffing on the gray base plate. The blue generator/motor unit has minor paint loss. Metal rail sections show tarnish and aging. Coupler mechanism appears functional.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-025"
-     data-type="Locomotive"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 41 united states army transportation corps locomotive"
-     data-era-min="1950"
-     data-item-no="25">
-    <span class="item-no">#025</span>
-    <img src="thumbs/item-025/item-025-01.jpg" alt="Lionel 41 United States Army Transportation Corps Locomotive">
-    <div class="body">
-      <h3>Lionel 41 United States Army Transportation Corps Locomotive</h3>
-      <div class="meta">Locomotive &middot; Lionel &middot; O gauge &middot; 1950-1960</div>
-      <div class="condition" title="Fair. Painted finish shows wear and some spotting. Roof ribbing appears intact. Couplers present but condition unclear. Trucks show oxidation typical of age.">Fair. Painted finish shows wear and some spotting. Roof ribbing appears intact. Couplers present but condition unclear. Trucks show oxidation typical of age.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-040"
-     data-type="Signal / Accessory"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 494 rotating beacon"
-     data-era-min="1940"
-     data-item-no="40">
-    <span class="item-no">#040</span>
-    <img src="thumbs/item-040/item-040-06.jpg" alt="Lionel 494 Rotating Beacon">
-    <div class="body">
-      <h3>Lionel 494 Rotating Beacon</h3>
-      <div class="meta">Signal / Accessory &middot; Lionel &middot; O gauge &middot; 1949-1963</div>
-      <div class="condition" title="Good. Paint is bright red overall with minor surface wear and small marks. The beacon lamp mechanism appears intact with original glass lens (red on top unit shown, green on lower unit). Structural framework sound. Wiring appears original, cloth-covered cord shows age. The accessory has been used but maintained reasonably well.">Good. Paint is bright red overall with minor surface wear and small marks. The beacon lamp mechanism appears intact with original glass lens (red on top unit shown, green on lower unit). Structural framework sound. Wiring appears original, cloth-covered cord shows age. The accessory has been used but maintained reasonably well.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-026"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 536417 pennsylvania caboose"
-     data-era-min="1950"
-     data-item-no="26">
-    <span class="item-no">#026</span>
-    <img src="thumbs/item-026/item-026-01.jpg" alt="Lionel 536417 Pennsylvania Caboose">
-    <div class="body">
-      <h3>Lionel 536417 Pennsylvania Caboose</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; 1950-1960</div>
-      <div class="condition" title="Good. Paint shows moderate wear and some dulling on the maroon finish. Windows and detail parts are intact. Trucks and couplers appear functional.">Good. Paint shows moderate wear and some dulling on the maroon finish. Windows and detail parts are intact. Trucks and couplers appear functional.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-052"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s"
-     data-status="Cataloged"
-     data-name="lionel 6434 poultry dispatch freight car"
-     data-era-min="1950"
-     data-item-no="52">
-    <span class="item-no">#052</span>
-    <img src="thumbs/item-052/item-052-01.jpg" alt="Lionel 6434 Poultry Dispatch Freight Car">
-    <div class="body">
-      <h3>Lionel 6434 Poultry Dispatch Freight Car</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; 1950-1955</div>
-      <div class="condition" title="Good. Paint is bright and well preserved with minimal chipping. Lithographed poultry images are colorful and mostly sharp. Door slides open without difficulty. Trucks and couplers function. Some general surface wear consistent with age and play.">Good. Paint is bright and well preserved with minimal chipping. Lithographed poultry images are colorful and mostly sharp. Door slides open without difficulty. Trucks and couplers function. Some general surface wear consistent with age and play.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-048"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s"
-     data-status="Cataloged"
-     data-name="lionel 6460 bucyrus erie railroad crane car"
-     data-era-min="1940"
-     data-item-no="48">
-    <span class="item-no">#048</span>
-    <img src="thumbs/item-048/item-048-01.jpg" alt="Lionel 6460 Bucyrus Erie Railroad Crane Car">
-    <div class="body">
-      <h3>Lionel 6460 Bucyrus Erie Railroad Crane Car</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; 1948-1952</div>
-      <div class="condition" title="Good. Paint shows wear and patina consistent with age; some dull spots on boom arm. Mechanism appears functional. Metal has surface oxidation but no major rust or corrosion. Couplers present and intact.">Good. Paint shows wear and patina consistent with age; some dull spots on boom arm. Mechanism appears functional. Metal has surface oxidation but no major rust or corrosion. Couplers present and intact.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-053"
-     data-type="Freight Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 6464-450 great northern box car"
-     data-era-min="1950"
-     data-item-no="53">
-    <span class="item-no">#053</span>
-    <img src="thumbs/item-053/item-053-01.jpg" alt="Lionel 6464-450 Great Northern Box Car">
-    <div class="body">
-      <h3>Lionel 6464-450 Great Northern Box Car</h3>
-      <div class="meta">Freight Car &middot; Lionel &middot; O gauge &middot; 1954-1968</div>
-      <div class="condition" title="Play wear visible; paint showing minor chips and scuffs on sides. Metal truck frames intact with good wheel sets. Couplers functional. Overall structurally sound despite cosmetic wear.">Play wear visible; paint showing minor chips and scuffs on sides. Metal truck frames intact with good wheel sets. Couplers functional. Overall structurally sound despite cosmetic wear.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-033"
-     data-type="Passenger Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel 746w norfolk and western tender"
-     data-era-min="1950"
-     data-item-no="33">
-    <span class="item-no">#033</span>
-    <img src="thumbs/item-033/item-033-01.jpg" alt="Lionel 746W Norfolk and Western Tender">
-    <div class="body">
-      <h3>Lionel 746W Norfolk and Western Tender</h3>
-      <div class="meta">Passenger Car &middot; Lionel &middot; O gauge &middot; 1950-1960</div>
-      <div class="condition" title="Good. The paint shows age and wear. Coal load is complete and molded in place. All four trucks are present and wheel sets appear intact. Some paint chipping and minor oxidation visible on the metal body.">Good. The paint shows age and wear. Coal load is complete and molded in place. All four trucks are present and wheel sets appear intact. Some paint chipping and minor oxidation visible on the metal body.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-059"
-     data-type="Signal / Accessory"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel no. 175 rocket launcher"
-     data-era-min="1950"
-     data-item-no="59">
-    <span class="item-no">#059</span>
-    <img src="thumbs/item-059/item-059-19.jpg" alt="Lionel No. 175 Rocket Launcher">
-    <div class="body">
-      <h3>Lionel No. 175 Rocket Launcher</h3>
-      <div class="meta">Signal / Accessory &middot; Lionel &middot; O gauge &middot; 1957-1963</div>
-      <div class="condition" title="Fair to Good. Box shows age with creasing and wear typical of 1950s-60s storage. Tower and accessories show play wear and dust but remain structurally sound. Rockets have paint wear on nose cones and wear to the lettering. Metal boom has surface oxidation. Control panel shows fading and minor cracking. Tinplate base shows rust spots and edge wear. Motor mechanism untested from photos but appears complete.">Fair to Good. Box shows age with creasing and wear typical of 1950s-60s storage. Tower and accessories show play wear and dust but remain structurally sound. Rockets have paint wear on nose cones and wear to the lettering. Metal boom has surface oxidation. Control panel shows fading and minor cracking. Tinplate base shows rust spots and edge wear. Motor mechanism untested from photos but appears complete.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-039"
-     data-type="Signal / Accessory"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel no. 192 illuminated control tower"
-     data-era-min="1950"
-     data-item-no="39">
-    <span class="item-no">#039</span>
-    <img src="thumbs/item-039/item-039-04.jpg" alt="Lionel No. 192 Illuminated Control Tower">
-    <div class="body">
-      <h3>Lionel No. 192 Illuminated Control Tower</h3>
-      <div class="meta">Signal / Accessory &middot; Lionel &middot; O gauge &middot; 1950-1969</div>
-      <div class="condition" title="Original box shows wear and age; structure appears intact with minor surface wear on paint and metal. Electrical connections present but operability not confirmed from photos alone.">Original box shows wear and age; structure appears intact with minor surface wear on paint and metal. Electrical connections present but operability not confirmed from photos alone.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-060"
-     data-type="Starter Set"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel no. 352 ice depot set"
-     data-era-min="1950"
-     data-item-no="60">
-    <span class="item-no">#060</span>
-    <img src="thumbs/item-060/item-060-30.jpg" alt="Lionel No. 352 Ice Depot Set">
-    <div class="body">
-      <h3>Lionel No. 352 Ice Depot Set</h3>
-      <div class="meta">Starter Set &middot; Lionel &middot; O gauge &middot; 1950-1960</div>
-      <div class="condition" title="Fair to good. Box is worn and water-stained but still displays legible set number and branding. Interior components show age and handling wear. Refrigerated cars have paint scuffs and one chipped side. Icing Station building shows some paint crazing and age discoloration. All major pieces present and functional.">Fair to good. Box is worn and water-stained but still displays legible set number and branding. Interior components show age and handling wear. Refrigerated cars have paint scuffs and one chipped side. Icing Station building shows some paint crazing and age discoloration. All major pieces present and functional.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-058"
-     data-type="Starter Set"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel no. 460 piggy back transportation set"
-     data-era-min="1950"
-     data-item-no="58">
-    <span class="item-no">#058</span>
-    <img src="thumbs/item-058/item-058-06.jpg" alt="Lionel No. 460 Piggy Back Transportation Set">
-    <div class="body">
-      <h3>Lionel No. 460 Piggy Back Transportation Set</h3>
-      <div class="meta">Starter Set &middot; Lionel &middot; O gauge &middot; 1950-1960</div>
-      <div class="condition" title="Fair to good. Box is worn with creasing, old handwriting inscription. Set items show play wear, paint loss on truck and platform. Trailers and flat car have age-related discoloration and paint wear but remain intact. Original paperwork and instructions likely missing.">Fair to good. Box is worn with creasing, old handwriting inscription. Set items show play wear, paint loss on truck and platform. Trailers and flat car have age-related discoloration and paint wear but remain intact. Original paperwork and instructions likely missing.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-051"
-     data-type="Station / Building"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel no. 465 sound dispatching station"
-     data-era-min="1940"
-     data-item-no="51">
-    <span class="item-no">#051</span>
-    <img src="thumbs/item-051/item-051-05.jpg" alt="Lionel No. 465 Sound Dispatching Station">
-    <div class="body">
-      <h3>Lionel No. 465 Sound Dispatching Station</h3>
-      <div class="meta">Station / Building &middot; Lionel &middot; O gauge &middot; postwar (1945-1969)</div>
-      <div class="condition" title="Station structure in good condition with minor paint wear on roof and base. Windows clear enough to see interior. Red button on speaker intact. Electrical wiring present and complete. Original boxes show expected age-related wear—creasing, minor tears to corrugated surfaces, and general storage wear, but graphic printing legible throughout.">Station structure in good condition with minor paint wear on roof and base. Windows clear enough to see interior. Red button on speaker intact. Electrical wiring present and complete. Original boxes show expected age-related wear—creasing, minor tears to corrugated surfaces, and general storage wear, but graphic printing legible throughout.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-024"
-     data-type="Signal / Accessory"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel no. 470 missile launching platform with exploding target car"
-     data-era-min="1950"
-     data-item-no="24">
-    <span class="item-no">#024</span>
-    <img src="thumbs/item-024/item-024-07.jpg" alt="Lionel No. 470 Missile Launching Platform with Exploding Target Car">
-    <div class="body">
-      <h3>Lionel No. 470 Missile Launching Platform with Exploding Target Car</h3>
-      <div class="meta">Signal / Accessory &middot; Lionel &middot; O gauge &middot; 1957-1960</div>
-      <div class="condition" title="Good. Original box shows wear, creasing, and color fading on edges. Platform base appears clean with no major cracks. Launch mechanism appears functional. Target car and freight cars show light play wear but paint is intact. Missile appears undamaged. All main parts present and accounted for.">Good. Original box shows wear, creasing, and color fading on edges. Platform base appears clean with no major cracks. Launch mechanism appears functional. Target car and freight cars show light play wear but paint is intact. Missile appears undamaged. All main parts present and accounted for.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-028"
-     data-type="Accessory / Vehicle"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel no. 50 section gang car"
-     data-era-min="1950"
-     data-item-no="28">
-    <span class="item-no">#028</span>
-    <img src="thumbs/item-028/item-028-01.jpg" alt="Lionel No. 50 Section Gang Car">
-    <div class="body">
-      <h3>Lionel No. 50 Section Gang Car</h3>
-      <div class="meta">Accessory / Vehicle &middot; Lionel &middot; O gauge &middot; 1954-1964</div>
-      <div class="condition" title="Good. The paint shows wear and minor scuffing on the orange finish. The wheels and couplers appear functional. Both worker figures are intact and securely molded to the platform. The base is intact with no visible cracks.">Good. The paint shows wear and minor scuffing on the orange finish. The wheels and couplers appear functional. Both worker figures are intact and securely molded to the platform. The base is intact with no visible cracks.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-029"
-     data-type="Passenger Car"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s"
-     data-status="Cataloged"
-     data-name="lionel no. 60 lionelville rapid transit trolley"
-     data-era-min="1950"
-     data-item-no="29">
-    <span class="item-no">#029</span>
-    <img src="thumbs/item-029/item-029-01.jpg" alt="Lionel No. 60 Lionelville Rapid Transit Trolley">
-    <div class="body">
-      <h3>Lionel No. 60 Lionelville Rapid Transit Trolley</h3>
-      <div class="meta">Passenger Car &middot; Lionel &middot; O gauge &middot; 1955-1956</div>
-      <div class="condition" title="Good. Yellow paint shows moderate wear and fading. Red roof has light scratches and wear marks. Black window frames and undercarriage in decent condition. Pantograph arm (overhead contact pole) is intact. Black bottom plate and metal wheels/trucks are original. Some paint loss visible on joints and edges.">Good. Yellow paint shows moderate wear and fading. Red roof has light scratches and wear marks. Black window frames and undercarriage in decent condition. Pantograph arm (overhead contact pole) is intact. Black bottom plate and metal wheels/trucks are original. Some paint loss visible on joints and edges.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-030"
-     data-type="Vehicle / Playset"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel no. 68 executive inspection car"
-     data-era-min="1950"
-     data-item-no="30">
-    <span class="item-no">#030</span>
-    <img src="thumbs/item-030/item-030-01.jpg" alt="Lionel No. 68 Executive Inspection Car">
-    <div class="body">
-      <h3>Lionel No. 68 Executive Inspection Car</h3>
-      <div class="meta">Vehicle / Playset &middot; Lionel &middot; O gauge &middot; 1958-1961</div>
-      <div class="condition" title="Good condition. Paint is bright and mostly clean. Roof has light wear and minor surface marks. Chrome plating on the front grille and bumpers shows age-related toning. Windows are intact. The taxi light and dome details are original.">Good condition. Paint is bright and mostly clean. Roof has light wear and minor surface marks. Chrome plating on the front grille and bumpers shows age-related toning. Windows are intact. The taxi light and dome details are original.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-034"
-     data-type="Locomotive"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel no. 746 hudson 4-6-4 steam locomotive"
-     data-era-min="1950"
-     data-item-no="34">
-    <span class="item-no">#034</span>
-    <img src="thumbs/item-034/item-034-06.jpg" alt="Lionel No. 746 Hudson 4-6-4 Steam Locomotive">
-    <div class="body">
-      <h3>Lionel No. 746 Hudson 4-6-4 Steam Locomotive</h3>
-      <div class="meta">Locomotive &middot; Lionel &middot; O gauge &middot; 1957-1960</div>
-      <div class="condition" title="Good. Locomotive body and paint show typical storage wear and light oxidation on metal parts. Tender intact with lid. All major components present and functioning mechanically.">Good. Locomotive body and paint show typical storage wear and light oxidation on metal parts. Tender intact with lid. All major components present and functioning mechanically.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-023"
-     data-type="Transformer / Power"
-     data-manufacturer="Lionel"
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1940s 1950s 1960s"
-     data-status="Cataloged"
-     data-name="lionel zw transformer with two-handle remote controls"
-     data-era-min="1940"
-     data-item-no="23">
-    <span class="item-no">#023</span>
-    <img src="thumbs/item-023/item-023-01.jpg" alt="Lionel ZW Transformer with TWO-Handle Remote Controls">
-    <div class="body">
-      <h3>Lionel ZW Transformer with TWO-Handle Remote Controls</h3>
-      <div class="meta">Transformer / Power &middot; Lionel &middot; O gauge &middot; 1946-1960</div>
-      <div class="condition" title="Good. The black plastic case shows normal wear and scuffing consistent with age and use. All controls, lights, and handles appear intact. The label is faded but legible. Power cord appears original and complete.">Good. The black plastic case shows normal wear and scuffing consistent with age and use. All controls, lights, and handles appear intact. The label is faded but legible. Power cord appears original and complete.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-042"
-     data-type="Transformer / Power"
-     data-manufacturer="MRC"
-     data-gauge="G scale (45mm); HO scale; O gauge; S gauge; Metric"
-     data-gauges="G scale (45mm)|HO scale|O gauge|S gauge|Metric"
-     data-decades="1970s 1980s 1990s"
-     data-status="Cataloged"
-     data-name="mrc trainpower 6200 power supply / controller"
-     data-era-min="1970"
-     data-item-no="42">
-    <span class="item-no">#042</span>
-    <img src="thumbs/item-042/item-042-07.jpg" alt="MRC TrainPower 6200 Power Supply / Controller">
-    <div class="body">
-      <h3>MRC TrainPower 6200 Power Supply / Controller</h3>
-      <div class="meta">Transformer / Power &middot; MRC &middot; G scale (45mm); HO scale; O gauge; S gauge; Metric &middot; 1970-1990</div>
-      <div class="condition" title="Good. Original box shows creasing and minor color fading on red top panel; unit surface shows light scratches and oxidation consistent with age but no deep damage. Cord intact and powering on; all controls functional. Manual present with normal age yellowing.">Good. Original box shows creasing and minor color fading on red top panel; unit surface shows light scratches and oxidation consistent with age but no deep damage. Cord intact and powering on; all controls functional. Manual present with normal age yellowing.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-011"
-     data-type="Station / Building"
-     data-manufacturer="Noma Lites, Inc."
-     data-gauge="O gauge"
-     data-gauges="O gauge"
-     data-decades="1950s"
-     data-status="Cataloged"
-     data-name="noma town station - green roof with clock tower"
-     data-era-min="1950"
-     data-item-no="11">
-    <span class="item-no">#011</span>
-    <img src="thumbs/item-011/item-011-01.jpg" alt="Noma Town Station - Green Roof with Clock Tower">
-    <div class="body">
-      <h3>Noma Town Station - Green Roof with Clock Tower</h3>
-      <div class="meta">Station / Building &middot; Noma Lites, Inc. &middot; O gauge &middot; 1950-1955</div>
-      <div class="condition" title="Good. Cream finish shows light aging. Green roof paint is intact with minor surface wear. Clock tower appears complete. Platform base shows typical shelf wear. All major pieces present and assembled.">Good. Cream finish shows light aging. Green roof paint is intact with minor surface wear. Clock tower appears complete. Platform base shows typical shelf wear. All major pieces present and assembled.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-043"
-     data-type="Track"
-     data-manufacturer="Lionel"
-     data-gauge="O Gauge (Three-Rail)"
-     data-gauges="O Gauge (Three-Rail)"
-     data-decades="1950s 1960s 1970s"
-     data-status="Cataloged"
-     data-name="three-rail o gauge tubular straight track (44 pieces)"
-     data-era-min="1950"
-     data-item-no="43">
-    <span class="item-no">#043</span>
-    <img src="thumbs/item-043/item-043-01.jpg" alt="Three-Rail O Gauge Tubular Straight Track (44 pieces)">
-    <div class="body">
-      <h3>Three-Rail O Gauge Tubular Straight Track (44 pieces)</h3>
-      <div class="meta">Track &middot; Lionel &middot; O Gauge (Three-Rail) &middot; 1950-1970</div>
-      <div class="condition" title="Very good used condition. Rails appear straight and clean with minimal oxidation. Connector pins appear to be installed.">Very good used condition. Rails appear straight and clean with minimal oxidation. Connector pins appear to be installed.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-
-  <a class="card" href="item.html?id=item-021"
-     data-type="Transformer / Power"
-     data-manufacturer="Tyco Industries Inc."
-     data-gauge="HO scale / O gauge"
-     data-gauges="HO scale|O gauge"
-     data-decades="1970s 1980s"
-     data-status="Cataloged"
-     data-name="tyco no. 897 master-pak train transformer"
-     data-era-min="1970"
-     data-item-no="21">
-    <span class="item-no">#021</span>
-    <img src="thumbs/item-021/item-021-01.jpg" alt="Tyco No. 897 Master-Pak Train Transformer">
-    <div class="body">
-      <h3>Tyco No. 897 Master-Pak Train Transformer</h3>
-      <div class="meta">Transformer / Power &middot; Tyco Industries Inc. &middot; HO scale / O gauge &middot; 1970-1985</div>
-      <div class="condition" title="Good condition with cosmetic wear. Copper-colored housing shows light scratches and patina. All controls appear intact. Power cord is present and in usable condition. Overload indicator light functional. Minor dust and surface marks consistent with age and storage.">Good condition with cosmetic wear. Copper-colored housing shows light scratches and patina. All controls appear intact. Power cord is present and in usable condition. Overload indicator light functional. Minor dust and surface marks consistent with age and storage.</div>
-      <span class="badge done">Cataloged</span>
-    </div>
-  </a>
-</div>
+<div class="grid" id="catalog-root"></div>
 <footer><a href="disclaimer.html">Disclaimer</a></footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+// Called by CATALOG_SCRIPT once cards + filter tags exist in the DOM
+// (catalog tiles are rendered client-side from data/catalog.json -- see
+// CATALOG_SCRIPT below -- so this can no longer just run on
+// DOMContentLoaded like it did back when cards were server-rendered).
+window.initCatalogFilters = function () {
   // Single-value facets read straight off card.dataset[<group>]. Multi-
   // value facets can match more than one tag per card -- 'decade' when an
   // item's era spans multiple decades (space-separated in data-decades),
@@ -1268,11 +168,11 @@ document.addEventListener('DOMContentLoaded', function () {
       apply();
     });
   }
-});
+};
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+window.initCatalogView = function () {
   var body = document.body;
   var grid = document.querySelector('.grid');
   if (!grid) return;
@@ -1281,6 +181,11 @@ document.addEventListener('DOMContentLoaded', function () {
   var sortButtons = Array.prototype.slice.call(document.querySelectorAll('.sort-controls button'));
   var STORAGE_VIEW = 'trainCatalogView';
   var STORAGE_SORT = 'trainCatalogSort';
+  var STORAGE_SORT_DIR = 'trainCatalogSortDir';
+  // dir: 1 = ascending (default), -1 = descending. Tracked separately from
+  // the active sort key so clicking the same sort button again flips
+  // direction instead of re-sorting the same way.
+  var state = { key: null, dir: 1 };
 
   function setView(view) {
     body.classList.toggle('view-list', view === 'list');
@@ -1302,35 +207,54 @@ document.addEventListener('DOMContentLoaded', function () {
     return (card.dataset.name || '').toLowerCase();
   }
 
-  function setSort(key) {
-    sortButtons.forEach(function (b) { b.classList.toggle('active', b.dataset.sort === key); });
+  function applySort(key, dir) {
+    state.key = key;
+    state.dir = dir;
+    sortButtons.forEach(function (b) {
+      var isActive = b.dataset.sort === key;
+      b.classList.toggle('active', isActive);
+      var arrow = b.querySelector('.arrow');
+      if (arrow) arrow.textContent = isActive ? (dir === 1 ? '\u25b2' : '\u25bc') : '';
+    });
     var sorted = cards.slice().sort(function (a, b) {
       var av = sortValue(a, key), bv = sortValue(b, key);
-      if (av < bv) return -1;
-      if (av > bv) return 1;
+      if (av < bv) return -1 * dir;
+      if (av > bv) return 1 * dir;
       // tie-break alphabetically by name so equal values stay predictable
       var an = a.dataset.name || '', bn = b.dataset.name || '';
       return an < bn ? -1 : (an > bn ? 1 : 0);
     });
     sorted.forEach(function (c) { grid.appendChild(c); });
-    try { localStorage.setItem(STORAGE_SORT, key); } catch (e) {}
+    try {
+      localStorage.setItem(STORAGE_SORT, key);
+      localStorage.setItem(STORAGE_SORT_DIR, String(dir));
+    } catch (e) {}
+  }
+
+  function toggleSort(key) {
+    // Clicking the already-active sort button flips its direction;
+    // clicking a different one switches to it, defaulting to ascending.
+    var dir = (state.key === key) ? -state.dir : 1;
+    applySort(key, dir);
   }
 
   viewButtons.forEach(function (btn) {
     btn.addEventListener('click', function () { setView(btn.dataset.view); });
   });
   sortButtons.forEach(function (btn) {
-    btn.addEventListener('click', function () { setSort(btn.dataset.sort); });
+    btn.addEventListener('click', function () { toggleSort(btn.dataset.sort); });
   });
 
-  var savedView = 'tiles', savedSort = 'name';
+  var savedView = 'tiles', savedSort = 'name', savedDir = 1;
   try {
     savedView = localStorage.getItem(STORAGE_VIEW) || 'tiles';
     savedSort = localStorage.getItem(STORAGE_SORT) || 'name';
+    var storedDir = parseInt(localStorage.getItem(STORAGE_SORT_DIR), 10);
+    savedDir = (storedDir === 1 || storedDir === -1) ? storedDir : 1;
   } catch (e) {}
   setView(savedView);
-  if (savedSort !== 'name') setSort(savedSort);
-});
+  applySort(savedSort, savedDir);
+};
 </script>
 
 <script>
@@ -1372,6 +296,214 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(function () { window.alert('Export failed -- try reloading the page and exporting again.'); })
       .finally(function () { btn.disabled = false; });
   });
+})();
+</script>
+
+<script>
+(function () {
+  var grid = document.getElementById('catalog-root');
+  var filtersRoot = document.getElementById('filters-root');
+  var viewControlsRoot = document.getElementById('view-controls-root');
+  var countEl = document.getElementById('item-count');
+  if (!grid) return;
+
+  function eraDecades(eraEstimate) {
+    var matches = (eraEstimate || '').match(/\d{4}/g);
+    if (!matches) return [];
+    var years = matches.map(Number);
+    var start = Math.min.apply(null, years), end = Math.max.apply(null, years);
+    if (end - start > 100) end = start;  // guard against a stray unrelated 4-digit number
+    var decades = [];
+    for (var y = start; y <= end; y++) {
+      var d = Math.floor(y / 10) * 10;
+      if (decades.indexOf(d) === -1) decades.push(d);
+    }
+    decades.sort(function (a, b) { return a - b; });
+    return decades.map(function (d) { return d + 's'; });
+  }
+
+  function gaugeValues(raw) {
+    if (!raw) return [];
+    return raw.split(/[;/]/).map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  function bump(counts, key) {
+    if (!key) return;
+    counts[key] = (counts[key] || 0) + 1;
+  }
+
+  function sortedTags(counts) {
+    // Most matches first; alphabetical as a tiebreak.
+    return Object.keys(counts).sort(function (a, b) {
+      if (counts[b] !== counts[a]) return counts[b] - counts[a];
+      return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
+    }).map(function (k) { return [k, counts[k]]; });
+  }
+
+  function sortedEraTags(counts) {
+    // Oldest decade first, chronological -- Era reads naturally as a
+    // timeline, unlike the other groups (most-common-first).
+    return Object.keys(counts).sort(function (a, b) {
+      return parseInt(a, 10) - parseInt(b, 10);
+    }).map(function (k) { return [k, counts[k]]; });
+  }
+
+  function tagGroup(label, groupKey, tags) {
+    if (!tags.length) return null;
+    var wrap = document.createElement('div');
+    wrap.className = 'tag-group';
+    var h3 = document.createElement('h3');
+    h3.textContent = label;
+    wrap.appendChild(h3);
+    var tagsEl = document.createElement('div');
+    tagsEl.className = 'tags';
+    tags.forEach(function (pair) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'tag';
+      btn.dataset.group = groupKey;
+      btn.dataset.value = pair[0];
+      btn.appendChild(document.createTextNode(pair[0] + ' '));
+      var count = document.createElement('span');
+      count.className = 'count';
+      count.textContent = pair[1];
+      btn.appendChild(count);
+      tagsEl.appendChild(btn);
+    });
+    wrap.appendChild(tagsEl);
+    return wrap;
+  }
+
+  function makeCard(item) {
+    var a = document.createElement('a');
+    a.className = 'card';
+    a.href = 'item.html?id=' + encodeURIComponent(item.id);
+
+    var decades = eraDecades(item.era_estimate);
+    var gauges = gaugeValues(item.gauge);
+    a.dataset.type = item.item_type || '';
+    a.dataset.manufacturer = item.manufacturer || '';
+    a.dataset.gauge = item.gauge || '';
+    a.dataset.gauges = gauges.join('|');
+    a.dataset.decades = decades.join(' ');
+    a.dataset.status = item.status_label || '';
+    a.dataset.name = (item.name || '').toLowerCase();
+    a.dataset.eraMin = decades.length
+      ? Math.min.apply(null, decades.map(function (d) { return parseInt(d, 10); }))
+      : '';
+    a.dataset.itemNo = /^\d+$/.test(item.number || '') ? parseInt(item.number, 10) : '';
+
+    var itemNo = document.createElement('span');
+    itemNo.className = 'item-no';
+    itemNo.textContent = '#' + item.number;
+    a.appendChild(itemNo);
+
+    var img = document.createElement('img');
+    if (item.photos && item.photos.length) {
+      img.src = item.photos[0].thumb;
+      img.alt = item.name;
+    } else {
+      img.alt = 'no photo';
+    }
+    a.appendChild(img);
+
+    var bodyEl = document.createElement('div');
+    bodyEl.className = 'body';
+    var h3 = document.createElement('h3');
+    h3.textContent = item.name;
+    bodyEl.appendChild(h3);
+
+    var metaBits = [item.item_type, item.manufacturer, item.gauge, item.era_estimate].filter(Boolean);
+    var meta = document.createElement('div');
+    meta.className = 'meta';
+    meta.textContent = metaBits.length ? metaBits.join(' \u00b7 ') : 'Not yet identified';
+    bodyEl.appendChild(meta);
+
+    // Condition is only shown in list view (see .condition CSS) -- it's
+    // often a full sentence or two, too long for the tile grid.
+    if (item.condition) {
+      var cond = document.createElement('div');
+      cond.className = 'condition';
+      cond.title = item.condition;
+      cond.textContent = item.condition;
+      bodyEl.appendChild(cond);
+    }
+
+    var badge = document.createElement('span');
+    badge.className = 'badge ' + item.status_css;
+    badge.textContent = item.status_label;
+    bodyEl.appendChild(badge);
+
+    a.appendChild(bodyEl);
+    return a;
+  }
+
+  function render(items) {
+    if (countEl) {
+      countEl.textContent = items.length + ' item(s) \u00b7 browse below for details, photos, and identification notes.';
+    }
+
+    if (!items.length) {
+      if (filtersRoot) filtersRoot.style.display = 'none';
+      if (viewControlsRoot) viewControlsRoot.style.display = 'none';
+      return;
+    }
+
+    var typeCounts = {}, makerCounts = {}, gaugeCounts = {}, decadeCounts = {}, statusCounts = {};
+    items.forEach(function (it) {
+      bump(typeCounts, it.item_type);
+      bump(makerCounts, it.manufacturer);
+      gaugeValues(it.gauge).forEach(function (g) { bump(gaugeCounts, g); });
+      eraDecades(it.era_estimate).forEach(function (d) { bump(decadeCounts, d); });
+      bump(statusCounts, it.status_label);
+    });
+
+    if (filtersRoot) {
+      var groups = [
+        tagGroup('Type', 'type', sortedTags(typeCounts)),
+        tagGroup('Maker', 'manufacturer', sortedTags(makerCounts)),
+        tagGroup('Gauge', 'gauge', sortedTags(gaugeCounts)),
+        tagGroup('Era', 'decade', sortedEraTags(decadeCounts)),
+        tagGroup('Status', 'status', sortedTags(statusCounts))
+      ].filter(Boolean);
+      if (groups.length) {
+        var filtersBox = document.createElement('div');
+        filtersBox.className = 'filters';
+        groups.forEach(function (g) { filtersBox.appendChild(g); });
+        var clearBtn = document.createElement('button');
+        clearBtn.type = 'button';
+        clearBtn.id = 'clear-filters';
+        clearBtn.className = 'clear';
+        clearBtn.textContent = 'Clear filters';
+        filtersBox.appendChild(clearBtn);
+        filtersRoot.appendChild(filtersBox);
+        var statusP = document.createElement('p');
+        statusP.id = 'filter-status';
+        statusP.className = 'filter-status';
+        filtersRoot.appendChild(statusP);
+      }
+    }
+
+    items.slice().sort(function (a, b) {
+      var an = (a.name || '').toLowerCase(), bn = (b.name || '').toLowerCase();
+      return an < bn ? -1 : (an > bn ? 1 : 0);
+    }).forEach(function (it) { grid.appendChild(makeCard(it)); });
+
+    if (window.initCatalogFilters) window.initCatalogFilters();
+    if (window.initCatalogView) window.initCatalogView();
+  }
+
+  function boot() {
+    fetch('data/catalog.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(render).catch(function () {
+      if (countEl) countEl.textContent = 'Could not load the catalog -- try reloading the page.';
+    });
+  }
+
+  if (document.body.classList.contains('gate-locked')) {
+    document.addEventListener('site-authed', boot, { once: true });
+  } else {
+    document.addEventListener('DOMContentLoaded', boot);
+  }
 })();
 </script>
 </body>
