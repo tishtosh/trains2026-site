@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Train Collection Catalog</title>
+</head>
+<body>
+<script>
+(function () {
+  var m = location.pathname.match(/^(.*\/site\/)item\/([^\/?#]+)\/?$/);
+  if (m) {
+    location.replace(m[1] + "item.html?id=" + m[2] + location.hash);
+    return;
+  }
+  var siteRoot = location.pathname.match(/^(.*\/site\/)/);
+  location.replace(siteRoot ? siteRoot[1] + "index.html" : "index.html");
+})();
+</script>
+</body>
+</html>

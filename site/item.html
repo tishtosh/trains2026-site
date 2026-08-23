@@ -172,6 +172,23 @@
         notesEl.style.display = '';
       }
 
+      // Cosmetic per-item URL, added 2026-08-23, purely so Cloudflare Web
+      // Analytics (which strips query strings and has no custom-event
+      // API) can tell which item was viewed -- otherwise every item shows
+      // up identically as "item.html". No file exists at this path; if
+      // reloaded or bookmarked/shared directly, site/404.html (copied to
+      // the published mirror's root by publish_site.sh) bounces it back
+      // to this real item.html?id=... . Every relative link already in
+      // the page (built above, or already in the static shell) must be
+      // frozen to its fully-RESOLVED absolute URL first: replaceState
+      // changes what "relative" resolves against for every link on the
+      // page, not just ones set after this point, so anything left
+      // relative would silently point one directory too deep afterward.
+      document.querySelectorAll('a[href]').forEach(function (a) { a.href = a.href; });
+      if (window.history && history.replaceState) {
+        history.replaceState(null, '', 'item/' + item.id);
+      }
+
       // --- lightbox, wired up now that the photo <img> tags actually exist ---
       var overlay = document.getElementById('lightbox');
       if (!thumbs.length || !overlay) return;
