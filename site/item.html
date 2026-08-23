@@ -178,13 +178,21 @@
       // up identically as "item.html". No file exists at this path; if
       // reloaded or bookmarked/shared directly, site/404.html (copied to
       // the published mirror's root by publish_site.sh) bounces it back
-      // to this real item.html?id=... . Every relative link already in
-      // the page (built above, or already in the static shell) must be
-      // frozen to its fully-RESOLVED absolute URL first: replaceState
-      // changes what "relative" resolves against for every link on the
-      // page, not just ones set after this point, so anything left
-      // relative would silently point one directory too deep afterward.
+      // to this real item.html?id=... . Every relative link/URL already
+      // on the page (built above, or already in the static shell) must be
+      // frozen to its fully-RESOLVED absolute form first: replaceState
+      // changes what "relative" resolves against for everything on the
+      // page, not just things set after this point -- most importantly
+      // each photo's data-full (e.g. "../photos/by-item/..."), read later
+      // by the lightbox on click, well after the rewrite; left relative,
+      // it would silently 404 one directory too deep instead of opening.
       document.querySelectorAll('a[href]').forEach(function (a) { a.href = a.href; });
+      thumbs.forEach(function (img) {
+        img.src = img.src;
+        if (img.dataset.full) {
+          img.dataset.full = new URL(img.dataset.full, location.href).href;
+        }
+      });
       if (window.history && history.replaceState) {
         history.replaceState(null, '', 'item/' + item.id);
       }
