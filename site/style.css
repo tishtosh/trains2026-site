@@ -116,14 +116,6 @@ table.value-table tr:hover td { background: rgba(0,0,0,0.03); }
 table.value-table a { color: inherit; }
 .sources a { display: inline-block; margin-right: 0.5rem; font-size: 0.85rem; opacity: 0.75; }
 .csv-link { margin: 1rem 0; }
-body.gate-locked > *:not(#site-gate) { display: none !important; }
-#site-gate { position: fixed; inset: 0; background: #111; z-index: 2000; display: flex; align-items: center; justify-content: center; }
-#site-gate.hidden { display: none; }
-#site-gate .gate-box { background: #1c1c1c; color: #eee; padding: 2rem 2.25rem; border-radius: 12px; max-width: 320px; width: 90%; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-#site-gate h2 { margin: 0 0 1rem; font-size: 1.15rem; }
-#site-gate input { width: 100%; box-sizing: border-box; padding: 0.6rem 0.75rem; font-size: 1rem; border-radius: 8px; border: 1px solid #444; background: #0d0d0d; color: #eee; margin-bottom: 0.75rem; }
-#site-gate button { width: 100%; padding: 0.6rem 0.75rem; font-size: 1rem; border-radius: 8px; border: none; background: #2563eb; color: #fff; cursor: pointer; }
-#site-gate .gate-error { color: #f87171; font-size: 0.85rem; min-height: 1.2em; margin: 0.6rem 0 0; }
 .item-not-found { padding: 3rem 0; opacity: 0.7; }
 
 /* --- Filters collapse toggle. Lives inline in the .view-controls row
@@ -167,12 +159,11 @@ body.gate-locked > *:not(#site-gate) { display: none !important; }
   body.view-list .card .condition { flex-basis: 100%; }
 }
 
-/* Keep page content and the fixed password overlay clear of the notch/
-   Dynamic Island and home-indicator safe areas, most relevant in
-   landscape on iPhone 13-and-later where those insets are on the sides. */
+/* Keep page content clear of the notch/Dynamic Island and home-indicator
+   safe areas, most relevant in landscape on iPhone 13-and-later where
+   those insets are on the sides. */
 @supports (padding: max(0px)) {
   body { padding-left: max(1.5rem, env(safe-area-inset-left)); padding-right: max(1.5rem, env(safe-area-inset-right)); }
-  #site-gate .gate-box { margin-bottom: env(safe-area-inset-bottom); }
 }
 
 /* --- 2026 visual refresh: a quieter, archival catalog presentation. --- */
@@ -241,12 +232,6 @@ body.view-list .card:hover { border-color: var(--line); background: var(--surfac
 body.view-list .card img { border-radius: 8px; }
 body.view-list .card .meta, body.view-list .card .condition { color: var(--muted); opacity: 1; }
 footer { padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); }
-#site-gate { background: #282a26; }
-#site-gate .gate-box { border: 1px solid #4a4b45; border-radius: 16px; background: #343631; box-shadow: 0 24px 70px rgba(0,0,0,0.4); }
-#site-gate h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.45rem; font-weight: 500; }
-#site-gate input { min-height: 46px; border-color: #5c5e56; background: #252722; }
-#site-gate button { min-height: 46px; background: var(--accent); font-weight: 700; }
-#site-gate button:hover { background: #b44031; }
 @media (max-width: 700px) {
   body { padding-left: 1rem; padding-right: 1rem; }
   header { padding-top: 2.75rem; }
