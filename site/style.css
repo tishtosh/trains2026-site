@@ -247,3 +247,18 @@ footer { padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--mu
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
 }
+
+/* --- Client-side password gate (public mirror only -- appended here by
+   scripts/gate_mirror_site.py; NOT part of the private repo's shared
+   style.css source, see that script's docstring for why) --- */
+body.gate-locked > *:not(#site-gate) { display: none !important; }
+#site-gate { position: fixed; inset: 0; background: #111; z-index: 2000; display: flex; align-items: center; justify-content: center; }
+#site-gate.hidden { display: none; }
+#site-gate .gate-box { background: #1c1c1c; color: #eee; padding: 2rem 2.25rem; border-radius: 12px; max-width: 320px; width: 90%; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+#site-gate h2 { margin: 0 0 1rem; font-size: 1.15rem; }
+#site-gate input { width: 100%; box-sizing: border-box; padding: 0.6rem 0.75rem; font-size: 1rem; border-radius: 8px; border: 1px solid #444; background: #0d0d0d; color: #eee; margin-bottom: 0.75rem; }
+#site-gate button { width: 100%; padding: 0.6rem 0.75rem; font-size: 1rem; border-radius: 8px; border: none; background: #2563eb; color: #fff; cursor: pointer; }
+#site-gate .gate-error { color: #f87171; font-size: 0.85rem; min-height: 1.2em; margin: 0.6rem 0 0; }
+@supports (padding: max(0px)) {
+  #site-gate .gate-box { margin-bottom: env(safe-area-inset-bottom); }
+}

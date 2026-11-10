@@ -5,12 +5,78 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Disclaimer — Train Collection Catalog</title>
-<link rel="stylesheet" href="style.css?v=97b9a7585c">
+<link rel="stylesheet" href="style.css?v=228f3012ac">
 <!-- Cloudflare Web Analytics -->
 <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b75d4ede3a044fe483a4d74fb32a657b"}'></script>
 <!-- End Cloudflare Web Analytics -->
 </head>
 <body>
+<div id="site-gate">
+  <form class="gate-box" id="site-gate-form" autocomplete="off">
+    <h2>This catalog is private</h2>
+    <input type="password" id="site-gate-input" placeholder="Password" autofocus>
+    <button type="submit">Enter</button>
+    <p class="gate-error" id="site-gate-error"></p>
+  </form>
+</div>
+<script>
+(function () {
+  var HASH = "9b59e3bc5d62d69b201e93eb8c491a567fc46533ca873e673131e1d236ebf544";
+  var STORE_KEY = "trainCatalogAuthed";
+  var storage = null;
+  try { storage = window.sessionStorage; } catch (e) { storage = null; }
+
+  var already = false;
+  try { already = !!storage && storage.getItem(STORE_KEY) === '1'; } catch (e) {}
+
+  function unlock() {
+    document.body.classList.remove('gate-locked');
+    var gate = document.getElementById('site-gate');
+    if (gate) gate.classList.add('hidden');
+    document.dispatchEvent(new Event('site-authed'));
+  }
+
+  if (already) {
+    unlock();
+  } else {
+    document.body.classList.add('gate-locked');
+  }
+
+  function sha256Hex(text) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+        return ('0' + b.toString(16)).slice(-2);
+      }).join('');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (already) return;
+    var form = document.getElementById('site-gate-form');
+    var input = document.getElementById('site-gate-input');
+    var error = document.getElementById('site-gate-error');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!window.crypto || !window.crypto.subtle) {
+        error.textContent = "This browser can't check the password here (needs https or localhost).";
+        return;
+      }
+      sha256Hex(input.value).then(function (hex) {
+        if (hex === HASH) {
+          try { storage && storage.setItem(STORE_KEY, '1'); } catch (e) {}
+          unlock();
+        } else {
+          error.textContent = 'Wrong password.';
+          input.value = '';
+          input.focus();
+        }
+      });
+    });
+  });
+})();
+</script>
+
 <a class="back" href="index.html">&larr; back to catalog</a>
 <h1>About This Catalog</h1>
 <div class="disclaimer">
